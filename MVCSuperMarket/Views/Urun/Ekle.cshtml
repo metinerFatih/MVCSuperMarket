@@ -1,0 +1,42 @@
+﻿@using MVCSuperMarket.Classes
+@model UrunViewModel
+
+
+<div class="card">
+    <div class="card-header">
+        <h1>Ürün Ekle</h1>
+    </div>
+    @{
+        if (TempData["Durum"] is not null)
+        {
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-danger">
+                    @TempData["Durum"]
+                </li>
+            </ul>
+        }
+    }
+    <div class="card-body">
+        <form asp-controller="Urun" asp-action="Ekle" method="post" enctype="multipart/form-data">
+            <div class="mb-2">
+                <label asp-for="Ad">Ürün Adı</label>
+                <input asp-for="Ad" class="form-control" type="text" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="mb-2">
+                <label asp-for="Fiyat"></label>
+                <input asp-for="Fiyat" class="form-control" type="text" />
+                <span asp-validation-for="Fiyat" class="text-danger"></span>
+            </div>
+            <div class="mb-2 d-flex">
+                <input asp-for="StoktaVarMi" class="me-1" type="checkbox" />
+                <label asp-for="StoktaVarMi">Stok Durumu</label>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Resim">Resim Ekleme</label>
+                <input type="file" asp-for="Resim" class="form-control" />
+            </div>
+            <button class="btn btn-primary">Ürün Ekle</button>
+        </form>
+    </div>
+</div>

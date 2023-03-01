@@ -1,0 +1,37 @@
+﻿@using MVCSuperMarket.Classes
+@model List<Urun>
+
+<h1>Ürünler</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ürün Id</th>
+        <th>Ürün Adı</th>
+        <th>Stok Durumu</th>
+        <th>Ürün Fiyatı</th>
+        <th>Ürün Resmi</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>@(item.StoktaVarMi == true ? "Var" : "Yok")</td>
+            <td>@item.Fiyat</td>
+            <td>
+                <img height="60px" width="60px" alt="Resim Yok" src="~/Resimler/@item.Resim" />
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Duzenle" asp-route-id="@item.Id">Düzenle</a>
+                <a class="btn btn-danger" asp-action="Sil" asp-route-id="@item.Id">Sil</a>
+                @if(!string.IsNullOrEmpty(item.Resim))
+                {
+                    <a class="btn btn-warning" asp-action="ResimKaldir" asp-route-id="@item.Id">Resim Kaldır</a>
+                }
+            </td>
+        </tr>
+
+    }
+</table>
+<a class="btn btn-success" asp-controller="Urun" asp-action="Ekle">Yeni Ürün Ekle</a>
